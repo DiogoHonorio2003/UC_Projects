@@ -1,0 +1,489 @@
+{
+	"info": {
+		"_postman_id": "e6e48899-c95d-475b-aec9-cf1106f965f4",
+		"name": "REQUESTS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27670308",
+		"_collection_link": "https://dark-escape-328183.postman.co/workspace/Base-de-Dados~5502b312-4edc-42ac-ad54-dbd33e5d81ca/collection/27670308-e6e48899-c95d-475b-aec9-cf1106f965f4?action=share&creator=27670308&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "LOGIN",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\" : \"admin\",\r\n  \"password\" : \"admin\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/dbproj/user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"dbproj",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CREATE MEMBER",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"Zezinho\",\r\n  \"password\": \"123\",\r\n  \"email\": \"pmconsumer@mail.com\",\r\n  \"first_name\": \"pm\",\r\n  \"last_name\": \"consumer\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/dbproj/user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"dbproj",
+						"user"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CREATE PREMIUM CONSUMER",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"premium teste 2\",\r\n  \"password\": \"123\",\r\n  \"email\": \"premium_consumer@mail.com\",\r\n  \"first_name\": \"premium\",\r\n  \"last_name\": \"consumer\",\r\n  \"user_type\": \"premium_consumer\",\r\n  \"subscription_type\": \"month\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/dbproj/user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"dbproj",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ADD SONG",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"song5\",\r\n  \"duration\": \"03:30:00\",\r\n  \"release_date\": \"31/05/2023 10:00:00\",\r\n  \"genre\": \"rap\",\r\n  \"artist_id\": \"1\",\r\n  \"other_id\": [2, 4]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/dbproj/song",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"dbproj",
+						"song"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ADD ALBUM",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"album_name\": \"Macacos do Artico 2\",\r\n  \"release_date\": \"02/06/2023 20:12:00\",\r\n  \"artist_id\": \"1\",\r\n  \"songs\": [\r\n    {\r\n      \"title\": \"Macacos Atrasados\",\r\n      \"release_date\": \"02/06/2023 20:12:00\",\r\n      \"duration\": \"3:00\",\r\n      \"genre\": \"jazz\",\r\n      \"artist_id\": \"1\",\r\n      \"other_artists\": [\"1\", \"1\"]\r\n    },\r\n    {\r\n      \"title\": \"Macacos Zombies\",\r\n      \"release_date\": \"02/06/2023 20:12:00\",\r\n      \"duration\": \"3:00\",\r\n      \"genre\": \"jazz\",\r\n      \"artist_id\": \"1\",\r\n      \"other_artists\": [\"1\", \"1\"]\r\n    },\r\n    \"3\"\r\n  ]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/dbproj/album",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"dbproj",
+						"album"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SEARCH SONG",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "{{token}}",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/dbproj/song/Macacos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"dbproj",
+						"song",
+						"Macacos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DETAIL ARTIST",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "{{token}}",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/dbproj/artist_info/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"dbproj",
+						"artist_info",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SUBSCRIBE TO PREMIUM",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"period\": \"month\",\r\n  \"cards\": [\"7955 8221 3234 5538 \"]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/dbproj/subcription",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"dbproj",
+						"subcription"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CREATE PLAYLIST",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"playlist_name\" : \"LETS GO\",\r\n  \"visibility\": \"public\",\r\n  \"songs\": [\r\n    \"2\",\r\n    \"8\"\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/dbproj/playlist",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"dbproj",
+						"playlist"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PLAY SONG",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/dbproj/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"dbproj",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GENERATE PRE PAID CARD",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"number_cards\":\"3\",\r\n  \"card_price\": 25\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/dbproj/card",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"dbproj",
+						"card"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LEAVE COMMENT",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"comment\": \"teste lock 2\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/dbproj/comments/8",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"dbproj",
+						"comments",
+						"8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LEAVE REPLY COMMENT",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"comment\": \"ola eu sou um reply\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/dbproj/comments/8/51",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"dbproj",
+						"comments",
+						"8",
+						"51"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MONTLY REPORT",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{Token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/dbproj/report/2023-11",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"dbproj",
+						"report",
+						"2023-11"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
