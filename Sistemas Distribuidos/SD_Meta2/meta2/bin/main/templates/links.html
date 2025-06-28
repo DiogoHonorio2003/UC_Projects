@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>URL</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .topnav {
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        .topnav a {
+            float: left;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        .topnav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .topnav a.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        form {
+            margin-top: 2rem;
+        }
+
+        input[type=text] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+        }
+
+        button[type=submit] {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button[type=submit]:hover {
+            opacity: 0.8;
+        }
+
+        p {
+            margin-top: 1rem;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="topnav">
+        <a class="active" href="/menu">Menu</a>
+    </div>
+
+    <h1>Introduza um link</h1>
+    <form action="/links" method="post">
+        <input type="text" name="links" placeholder="Link">
+        <button type="submit">Pesquisar</button>
+    </form>
+    <p th:text="${linkResult}"></p>
+
+    <div th:each="batch, batchIndex : ${batches}" th:attr="data-index=${batchIndex.index}" th:style="${batchIndex.index == 0 ? 'display:block;' : 'display:none;'}">
+        <ul>
+            <li th:each="result : ${batch}" th:text="${result}"></li>
+        </ul>
+        <hr>
+    </div>
+
+    <!-- Botões de navegação -->
+    <button id="prevButton">Anteriores</button>
+    <button id="nextButton">Próximos</button>
+
+    <!-- Linha para mostrar quantos resultados foram obtidos -->
+    <p id="resultsCount"></p>
+
+    <script>
+        var currentBatchIndex = 0;
+        var batches = document.querySelectorAll("[data-index]");
+
+        // Contar o número total de resultados
+        var totalResults = 0;
+        batches.forEach(batch => {
+            totalResults += batch.querySelectorAll("li").length;
+        });
+
+        // Atualizar o texto do contador de resultados
+        document.getElementById("resultsCount").innerText = `Total de resultados: ${totalResults}`;
+
+        // Função para mostrar os próximos 10 resultados
+        function showNextResults() {
+            if (currentBatchIndex < batches.length - 1) {
+                batches[currentBatchIndex].style.display = 'none';
+                currentBatchIndex++;
+                batches[currentBatchIndex].style.display = 'block';
+            }
+        }
+
+        // Função para mostrar os resultados anteriores
+        function showPreviousResults() {
+            if (currentBatchIndex > 0) {
+                batches[currentBatchIndex].style.display = 'none';
+                currentBatchIndex--;
+                batches[currentBatchIndex].style.display = 'block';
+            }
+        }
+
+        // Adicionando eventos aos botões
+        document.getElementById("prevButton").addEventListener("click", showPreviousResults);
+        document.getElementById("nextButton").addEventListener("click", showNextResults);
+    </script>
+</body>
+
+</html>
