@@ -1,0 +1,42 @@
+iptables -P INPUT DROP
+iptables -P FORWARD DROP
+iptables -P OUTPUT ACCEPT
+iptables -A INPUT -i eth1 -p udp –-dport 53 -j ACCEPT
+iptables -A INPUT -i eth2 -p udp –-dport 53 -j ACCEPT
+iptables -A INPUT -i eth1 -p tcp –-dport 22 -j ACCEPT
+iptables -A INPUT -s 23.214.219.132 -p tcp –-dport 22 -j ACCEPT
+iptables -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT 
+iptables -A FORWARD -p udp -d 23.214.219.129 -–dport 53 -j ACCEPT
+iptables -A FORWARD -s 23.214.219.129 -d 87.248.214.2 -p udp --dport 53 -j ACCEPT
+iptables -A FORWARD -p tcp -d 23.214.219.130 -–dport 25 -j ACCEPT
+iptables -A FORWARD -p tcp -d 23.214.219.131 -–dport 80 -j ACCEPT
+iptables -A FORWARD -p tcp -d 23.214.219.131 -–dport 443 -j ACCEPT
+iptables -A FORWARD -p tcp -d 23.214.219.132 -–dport 1194 -j ACCEPT
+iptables -A FORWARD -p tcp -d 23.214.219.133 -–dport 110 -j ACCEPT
+iptables -A FORWARD -p tcp -d 23.214.219.133 -–dport 143 -j ACCEPT
+iptables -A FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT
+iptables -A FORWARD -p tcp -d 192.168.10.2 --dport 21 -j ACCEPT
+iptables -A FORWARD -p tcp -d 192.168.10.2 --dport 20 -j ACCEPT
+iptables -A FORWARD -p tcp -d 192.168.10.2 --dport 1024:65535 -j ACCEPT
+iptables -A FORWARD -p tcp -s 87.248.214.3 -d 192.168.10.3 --dport 22 -j ACCEPT
+iptables -A FORWARD -p tcp -s 87.248.214.4 -d 192.168.10.3 --dport 22 -j ACCEPT
+iptables -A FORWARD -d 87.248.214.0/24 -p udp --dport 53 -j ACCEPT
+iptables -A FORWARD -d 87.248.214.0/24 -p tcp --dport 80 -j ACCEPT
+iptables -A FORWARD -d 87.248.214.0/24 -p tcp --dport 443 -j ACCEPT
+iptables -A FORWARD -d 87.248.214.0/24 -p tcp --dport 22 -j ACCEPT
+iptables -A FORWARD -d 87.248.214.0/24 -p tcp --dport 21 -j ACCEPT
+iptables -A FORWARD -d 87.248.214.0/24 -p tcp --dport 20 -j ACCEPT
+iptables -A FORWARD -d 87.248.214.0/24 -p tcp –dport 1024:65535 -j ACCEPT
+iptables -t nat -A POSTROUTING -s 23.214.219.132 -j MASQUERADE
+iptables -t nat -A PREROUTING -i eth3 -p tcp --dport 21 -j DNAT --to-destination 192.168.10.2:21
+iptables -t nat -A PREROUTING -i eth3 -p tcp --dport 20 -j DNAT --to-destination 192.168.10.2:20
+iptables -t nat -A PREROUTING -i eth3 -p tcp --dport 1024:65535 -j DNAT --to-destination 192.168.10.2
+iptables -t nat -A PREROUTING -p tcp -s 87.248.214.3 --dport 22 -j DNAT --to-destination 192.168.10.3:22
+iptables -t nat -A PREROUTING -p tcp -s 87.248.214.4 --dport 22 -j DNAT --to-destination 192.168.10.3:22
+iptables -t nat -A POSTROUTING -s 192.168.10.0/24 -p udp --dport 53 -j SNAT --to-source 87.248.214.97
+iptables -t nat -A POSTROUTING -s 192.168.10.0/24 -p tcp --dport 80 -j SNAT --to-source 87.248.214.97
+iptables -t nat -A POSTROUTING -s 192.168.10.0/24 -p tcp --dport 443 -j SNAT --to-source 87.248.214.97
+iptables -t nat -A POSTROUTING -s 192.168.10.0/24 -p tcp --dport 22 -j SNAT --to-source 87.248.214.97
+iptables -t nat -A POSTROUTING -s 192.168.10.0/24 -p tcp --dport 21 -j SNAT --to-source 87.248.214.97
+iptables -t nat -A POSTROUTING -s 192.168.10.0/24 -p tcp --dport 20 -j SNAT --to-source 87.248.214.97
+iptables -t nat -A POSTROUTING -s 192.168.10.0/24 -p tcp --dport 1024:65535 -j SNAT --to-source 87.248.214.97
