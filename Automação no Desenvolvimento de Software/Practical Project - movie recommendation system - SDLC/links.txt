@@ -1,0 +1,5 @@
+Link para repositório GitHub(branch main para versão tradicional e branch ai-main para a versão com utilização de AI):
+https://github.com/John1421/next_watch
+
+Link para o sistema deployed:
+https://next-watch-nzjo.onrender.com/
